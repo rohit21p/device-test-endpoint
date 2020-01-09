@@ -1,4 +1,5 @@
 const server = require("net").createServer();
+const fs = require('fs');
 
 server.on("connection", socket => {
     socket.setEncoding("hex");
@@ -6,37 +7,24 @@ server.on("connection", socket => {
     socket.setKeepAlive(true, 50000);
     socket.on("data", data => {
         const parsed__ = parser(data);
-        if (
-            Array.isArray(parsed__) &&
-            parsed__.length > 0 &&
-            typeof parsed__[0] === "object" &&
-            parsed__[0].case
-        ) {
-            const imei =
-                parsed__[0].case === "01" ?
-                helpers.imei_manager.set(
-                    parsed__[0].imei,
-                    socket.remoteAddress,
-                    socket.remotePort
-                ) :
-                helpers.imei_manager.get(
-                    socket.remoteAddress,
-                    socket.remotePort
-                );
-            if (imei) {
-                helpers.data_middleware(parsed__.map(k => ({
-                    ...k,
-                    imei,
-                    socket: client
-                })));
+        fs.readFile('data.txt', 'utf8', (err, data) => {
+            if (err) {
+                console.log(err);
             }
-            parsed__.filter(k => k.output).forEach((k) => {
-                socket.write(
-                    Buffer.from(
-                        k.output.match(/.{2}/g).map(i => parseInt(i, 16))
-                    ));
-            });
-        } else helpers.send_invalid_data_to_api(data);
+            else {
+                data = data + '\n\n---------------------------------\n\n' + body;
+                fs.writeFile('data.txt', data, (err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        console.log('\n\n---------------------------------\n\n');
+                    }
+                    res.send();
+                })
+            }
+            res.send();
+        });
     });
     socket.on("error", err => {
         console.error({ event: "error", err: err.message, client });
