@@ -7,6 +7,7 @@ server.on("connection", socket => {
     socket.setKeepAlive(true, 50000);
     socket.on("data", data => {
         data = parser(data);
+        console.log(data);
         fs.readFile('data.txt', 'utf8', (err, data) => {
             if (err) {
                 console.log(err);
