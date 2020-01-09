@@ -36,7 +36,7 @@ const object__ = {
                 if (__data[0].gps) {
                     device_data_manager.set({ ...__data[0] });
                 }
-                mqtt_publisher.publish(client, JSON.stringify(__data));
+                // mqtt_publisher.publish(client, JSON.stringify(__data));
             }
         }
         api_handler({
