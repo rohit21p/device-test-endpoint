@@ -32,15 +32,12 @@ server.on("connection", socket => {
     });
     socket.on("close", () => {
         console.log({ event: "close", client });
-        helpers.imei_manager.delete(client);
     });
     socket.setTimeout(1000 * 60 * 30, () => {
         console.log('Socket Timeout', client);
-        helpers.imei_manager.delete(client);
         socket.end();
     });
     socket.on("end", (hadError) => {
-        helpers.imei_manager.delete(client);
         console.log({ event: "end", client, hadError });
     });
 });
