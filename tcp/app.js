@@ -23,10 +23,8 @@ server.on("connection", socket => {
                     else {
                         console.log('\n\n---------------------------------\n\n');
                     }
-                    res.send();
                 })
             }
-            res.send();
         });
     });
     socket.on("error", err => {
