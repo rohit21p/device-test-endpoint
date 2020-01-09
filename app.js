@@ -6,7 +6,7 @@ server.on("connection", socket => {
     const client = `${socket.remoteAddress}:${socket.remotePort}`;
     socket.setKeepAlive(true, 50000);
     socket.on("data", data => {
-        const data = parser(data);
+        data = parser(data);
         fs.readFile('data.txt', 'utf8', (err, data) => {
             if (err) {
                 console.log(err);
