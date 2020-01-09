@@ -10,13 +10,13 @@ server.on("connection", socket => {
     socket.on("data", data => {
         data = parser(data);
         console.log(data);
-        fs.readFile('data.txt', 'utf8', (err, data) => {
+        fs.readFile('data.txt', 'utf8', (err, filedata) => {
             if (err) {
                 console.log(err);
             }
             else {
-                data = data + '\n\n---------------------------------\n\n' + body;
-                fs.writeFile('data.txt', data, (err) => {
+                filedata = filedata + '\n\n---------------------------------\n\n' + data;
+                fs.writeFile('data.txt', filedata, (err) => {
                     if (err) {
                         console.log(err);
                     }
