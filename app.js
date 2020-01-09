@@ -1,6 +1,8 @@
 const server = require("net").createServer();
 const fs = require('fs');
 
+const parser = require("./parser");
+
 server.on("connection", socket => {
     socket.setEncoding("hex");
     const client = `${socket.remoteAddress}:${socket.remotePort}`;
